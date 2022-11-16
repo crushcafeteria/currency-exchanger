@@ -1,0 +1,62 @@
+<div class="col">
+    <h2>Currency Exchanger</h2>
+    <br />
+    <div class="card">
+        <div class="grid grid-2">
+            <section>
+                <div class="form-group">
+                    <label class="label" for="amount">Amount</label>
+                    <input type="text" name="amout" class="input" [(ngModel)]="amount" />
+                </div>
+            </section>
+            <section>
+                <div class="grid grid-3-converter">
+                    <div class="form-group">
+                        <label class="label" for="from">From</label>
+                        <select name="from" class="input" [(ngModel)]="from">
+                            <option [value]="symbol.key" *ngFor="let symbol of currencies | keyvalue">
+                                {{symbol.value}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="d-none exchange">
+                        <button class="btn swap-btn">
+                            <i class="fa fa-exchange fa-fw"></i>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="label" for="to">To</label>
+                        <select name="to" class="input" [(ngModel)]="to">
+                            <option [value]="symbol.key" *ngFor="let symbol of currencies | keyvalue">
+                                {{symbol.value}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col mt">
+                    <button class="btn btn-success w-100" (click)="convert()" [disabled]="!amount">
+                        <i class="fa fa-refresh fa-fw fa-spin" *ngIf="busy"></i>
+                        <i class="fa fa-exchange fa-fw" *ngIf="!busy"></i>
+                        Convert
+                    </button>
+                </div>
+
+                <div class="grid grid-2 mt">
+                    <div class="result">
+                        <h2 *ngIf="result && !busy">{{to}} {{result | number:'1.0-5'}}</h2>
+                        <p *ngIf="!result && !busy">Please select a currency pair</p>
+                        <p *ngIf="busy">Converting...</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-lg w-100">More Details</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+<pre>
+    <!-- {{currencies | json}} -->
+</pre>
