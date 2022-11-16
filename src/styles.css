@@ -1,5 +1,5 @@
 /* Add icons */
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css);
 
 /* Responsive navbar */
 * {
@@ -32,7 +32,7 @@ label.logo{
 nav ul {
     float: right;
     line-height: 80px;
-
+    z-index: 100;
 }
 
 nav ul li {
@@ -90,7 +90,7 @@ a.active,a:hover{
         background-color: #039BE5;
         top: 80px;
         width: 100vw;
-        left: -100%;
+        left: -120%;
         text-align: center;
         transition: all .2s;
     }
@@ -112,4 +112,143 @@ a.active,a:hover{
     #check:checked ~ ul {
         left: 0;
     }
+
+    .container {
+        padding: 20px 40px;
+    }
 }
+
+/* Grid system */
+.container {
+    padding: 30px 100px;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    /* Setup fractional units / spacing */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.grid-3-converter {
+    grid-template-columns: 12fr 1fr 12fr;
+}
+
+.d-none {
+    display: block;
+}
+
+.grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.mt {
+    margin-top: 30px;
+}
+
+.result {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.border {
+    border: 1px solid red;
+    padding: 40px;
+    margin: 20px 0;
+}
+
+.label {
+    display: block;
+    padding: 5px 0;
+}
+
+.input {
+    width: 100%;
+    display: block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #9E9E9E;
+    outline: none !important;
+}
+
+.input:focus {
+    border: 1px solid #2196F3;
+}
+
+.card {
+    border: 1px solid #ddd;
+    /* margin: 20px 0; */
+    padding: 20px;
+    background: #fff;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-lg {
+    padding: 16px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.sticky {
+    position: sticky;
+    /* top: 10px; */
+}
+
+.btn-primary {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}
+
+.btn-primary:hover{
+    background-color: #1565C0;
+}
+.btn-success {
+    background-color: #76FF03;
+    border-color: #76FF03;
+}
+
+.btn-success:hover{
+    background-color: #64DD17;
+}
+
+.mb{
+    margin-bottom: 10px;
+}
+
+
+@media(max-width: 768px){
+    .container {
+        padding: 20px 40px;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .d-none {
+        display: none;
+    }
+
+    .grid-3-converter {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+

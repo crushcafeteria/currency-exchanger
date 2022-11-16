@@ -1,0 +1,17 @@
+<nav>
+    <input type="checkbox" id="check" />
+    <label for="check" class="checkbtn">
+        <i class="fa fa-bars fa-fw"></i>
+    </label>
+    <label class="logo">
+        <i class="fa fa-exchange fa-fw"></i>
+    </label>
+    <ul>
+        <li>
+            <a routerLink="/details" [queryParams]="{from: 'EUR', to: 'USD'}" class="activeX">EUR - USD Details</a>
+        </li>
+        <li>
+            <a routerLink="/details" [queryParams]="{from: 'EUR', to: 'GBP'}">EUR - GBP Details</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,28 @@
+<div class="container">
+    <!-- Converter panel -->
+    <app-converterbox [popular]="popular" [from]="from" [to]="to" (conversionUpdated)="updatePopularPairRates($event)">
+    </app-converterbox>
+
+
+    <!-- Converted values -->
+    <div *ngIf="!busy">
+        <div class="grid grid-3 mt" *ngIf="rates">
+            <div class="card text-center" *ngFor="let rate of rates | keyvalue">
+                <h4 class="mb">{{rate.key}}</h4>
+                {{calculateRate(rate.value) | number:'1.0-5'}}
+            </div>
+        </div>
+        <div class="text-center mt" *ngIf="!rates">
+            <i class="fa fa-info-circle fa-2x"></i>
+            <h3 class="mt">Please convert a currency above to see all popular options</h3>
+        </div>
+        <pre>
+            {{rates | json}}
+        </pre>
+    </div>
+
+    <div class="text-center mt" *ngIf="busy">
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <h3 class="mt">Updating popular currencies</h3>
+    </div>
+</div>
