@@ -4,12 +4,19 @@
             <i class="fa fa-arrow-left fa-fw"></i> Back to Home
         </button>
         <app-converterbox [from]="from" [to]="to" [amount]="amount" [isDetails]="true" [title]="getCurrencyName(from)"
-            (conversionUpdated)="updateChart($event)">
+            (conversionUpdated)="drawChart($event)">
         </app-converterbox>
     </div>
 
-    <div class="card">
-        <div [chart]="chart"></div>
+    <div class="card" *ngIf="!busy">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" [oneToOne]=true
+            style="width:100%; display: block;">
+        </highcharts-chart>
+    </div>
+
+    <div class="text-center mt text-muted" *ngIf="busy">
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <h3 class="mt">Updating historical data</h3>
     </div>
 
 </div>
