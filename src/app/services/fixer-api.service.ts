@@ -1,11 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, retry, startWith, tap } from 'rxjs/operators';
-import { settings } from '../settings';
-import { historical_EUR_USD } from '../spec-helper/FixerAPIMockResponses';
-import { CacheResolverService } from './cache-resolver.service';
 import * as moment from 'moment';
+import { settings } from '../settings';
+import { CacheResolverService } from './cache-resolver.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ apiKey: settings.API_KEY }),

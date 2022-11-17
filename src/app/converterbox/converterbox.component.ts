@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CacheResolverService } from '../services/cache-resolver.service';
 import { FixerAPIService } from '../services/fixer-api.service';
-import { settings } from '../settings';
 
 @Component({
     selector: 'app-converterbox',
