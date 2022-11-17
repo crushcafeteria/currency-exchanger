@@ -22,24 +22,19 @@ export class ConverterboxComponent implements OnInit {
     @Input() result: any = null;
     busy: boolean = false;
     @Input() popular: string[] = [];
-    @Output() conversionUpdated = new EventEmitter<number>();
+    @Output() conversionUpdated = new EventEmitter();
     rate: number = 0;
     @Input() isDetails: boolean = false;
 
     ngOnInit(): void {
         // Get all available currencies
-        if (this.cache.get(settings.CACHE_KEYS.SYMBOLS)) {
-            this.currencies = this.cache.get(settings.CACHE_KEYS.SYMBOLS);
-        } else {
-            this.fixerAPI.getAllCurrencies().subscribe({
-                next: (res) => {
-                    this.currencies = res.symbols;
-                    this.cache.set(settings.CACHE_KEYS.SYMBOLS, res.symbols);
-                },
-                error: (err) => console.log(err),
-                complete: () => console.log('Currency symbols loaded'),
-            });
-        }
+        this.fixerAPI.getAllCurrencies().subscribe({
+            next: (res: any) => {
+                this.currencies = res.symbols;
+            },
+            error: (err: any) => console.log(err),
+            complete: () => console.log('Currency symbols loaded'),
+        });
 
         // Always convert onLoad in details page
         if (this.isDetails) {
@@ -54,28 +49,25 @@ export class ConverterboxComponent implements OnInit {
             return false;
         }
 
-        const cacheKey = `${this.from}_${this.to}_${this.amount}`;
-        if (this.cache.get(cacheKey)) {
-            this.result = this.cache.get(cacheKey).result;
-            this.rate = this.cache.get(cacheKey).info.rate;
-        } else {
-            this.busy = true;
-            this.fixerAPI
-                .convertCurrencyPair(this.from, this.to, this.amount)
-                .subscribe({
-                    next: (res) => {
-                        this.result = res.result;
-                        this.rate = res.info.rate;
-                        this.cache.set(cacheKey, res);
-                        this.busy = false;
-                    },
-                    error: (err) => console.log(err),
-                    complete: () => console.log('Currency converted'),
-                });
-        }
+        this.busy = true;
+        this.fixerAPI
+            .convertCurrencyPair(this.from, this.to, this.amount)
+            .subscribe({
+                next: (res) => {
+                    this.result = res.result;
+                    this.rate = res.info.rate;
+                    this.busy = false;
+                },
+                error: (err) => console.log(err),
+                complete: () => console.log('Currency successfully converted'),
+            });
 
         // Signal parent to update popular pairs
-        this.conversionUpdated.emit(this.amount);
+        this.conversionUpdated.emit({
+            from: this.from,
+            to: this.to,
+            amount: this.amount,
+        });
         return true;
     }
 

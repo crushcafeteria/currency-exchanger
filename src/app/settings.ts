@@ -1,6 +1,6 @@
 export const settings = {
     // API connection details
-    API_KEY: '5tzEpWOO63v3LJXRzyX1PPLEgGYr0MSi',
+    API_KEY: 'HvGFs6vv512GecTcjC0KSj6VqnMhQLxN',
     API_URL: 'https://api.apilayer.com/fixer',
 
     // Define cache key names

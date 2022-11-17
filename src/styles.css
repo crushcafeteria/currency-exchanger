@@ -192,6 +192,8 @@ a.active,a:hover{
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    font-size: 14px;
 }
 
 .btn-lg {
@@ -220,13 +222,22 @@ a.active,a:hover{
 .btn-primary:hover{
     background-color: #1565C0;
 }
+
+.btn-primary:disabled {
+    background-color: #90CAF9;
+    border-color: #90CAF9;
+    color: #fff;
+    cursor: not-allowed;
+}
+
 .btn-success {
-    background-color: #76FF03;
-    border-color: #76FF03;
+    background-color: #64DD17;
+    border-color: #64DD17;
+    color: #fff;
 }
 
 .btn-success:hover{
-    background-color: #64DD17;
+    background-color: #76FF03;
 }
 
 .mb{
