@@ -23,66 +23,26 @@ export class FixerAPIService {
     // Get all available symbols from API
     getAllCurrencies() {
         const url = `${settings.API_URL}/symbols`;
-        const cacheKey = `cache_currency_symbols`;
-
-        if (this.cache.get(cacheKey)) {
-            return of(this.cache.get(cacheKey));
-        } else {
-            const res = this.http.get<any>(url, httpOptions);
-            res.subscribe((res) => {
-                this.cache.set(cacheKey, res);
-            });
-            return res;
-        }
+        return this.http.get<any>(url, httpOptions);
     }
 
     // convert currency pair
     convertCurrencyPair(from: string, to: string, amount: number) {
         const url = `${settings.API_URL}/convert?to=${to}&from=${from}&amount=${amount}`;
-        const cacheKey = `cache_convert_${from}_${to}_${amount}`;
-
-        if (this.cache.get(cacheKey)) {
-            return of(this.cache.get(cacheKey));
-        } else {
-            const res = this.http.get<any>(url, httpOptions);
-            res.subscribe((res) => {
-                this.cache.set(cacheKey, res);
-            });
-            return res;
-        }
+        return this.http.get<any>(url, httpOptions);
     }
 
     // Get latest exchange rates
     latestPopularRates(base: string, symbols: any) {
         const currencies = symbols.join(',');
         const url = `${settings.API_URL}/latest?base=${base}&symbols=${currencies}`;
-        const cacheKey = `cache_popular_${base}`;
-
-        if (this.cache.get(cacheKey)) {
-            return of(this.cache.get(cacheKey));
-        } else {
-            const res = this.http.get<any>(url, httpOptions);
-            res.subscribe((res) => {
-                this.cache.set(cacheKey, res);
-            });
-            return res;
-        }
+        return this.http.get<any>(url, httpOptions);
     }
 
     getHistoricalData(base: string, symbol: string) {
         const startDate = moment().subtract(12, 'months').format('YYYY-MM-DD');
         const endDate = moment().format('YYYY-MM-DD');
         const url = `${settings.API_URL}/timeseries?start_date=${startDate}&end_date=${endDate}&base=${base}&symbols=${symbol}`;
-        const cacheKey = `cache_${base}_${symbol}_history`;
-
-        if (this.cache.get(cacheKey)) {
-            return of(this.cache.get(cacheKey));
-        } else {
-            const res = this.http.get<any>(url, httpOptions);
-            res.subscribe((res) => {
-                this.cache.set(cacheKey, res);
-            });
-            return res;
-        }
+        return this.http.get<any>(url, httpOptions);
     }
 }

@@ -12,7 +12,9 @@ import {
     amount,
     symbolsResponse,
     latestRatesResponse,
+    historical_EUR_USD,
 } from '../spec-helper/FixerAPIMockResponses';
+import * as moment from 'moment';
 
 const popular: string[] = [
     'USD',
@@ -78,5 +80,19 @@ describe('FixerAPIService', () => {
             method: 'GET',
         });
         request.flush(latestRatesResponse);
+    });
+
+    it('should get historical data for currency pairs', () => {
+        service.getHistoricalData(from, to).subscribe((res) => {
+            expect(res).toEqual(historical_EUR_USD);
+        });
+
+        const startDate = moment().subtract(12, 'months').format('YYYY-MM-DD');
+        const endDate = moment().format('YYYY-MM-DD');
+        const request = httpTestingController.expectOne({
+            url: `${settings.API_URL}/timeseries?start_date=${startDate}&end_date=${endDate}&base=${from}&symbols=${to}`,
+            method: 'GET',
+        });
+        request.flush(historical_EUR_USD);
     });
 });
