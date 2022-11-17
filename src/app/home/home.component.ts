@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
                 .subscribe((res) => {
                     this.rates = res.rates;
                     console.log(res);
-                    // this.cache.set(cacheKey, res);
+                    this.cache.set(cacheKey, res);
                     this.busy = false;
                 });
         }

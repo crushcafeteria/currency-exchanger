@@ -14,6 +14,7 @@ export class ConverterboxComponent implements OnInit {
         private cache: CacheResolverService
     ) {}
 
+    @Input() title: string = 'Welcome to Currency Exchanger';
     @Input() currencies: any = [];
     @Input() amount: number = 1;
     @Input() from: string = 'EUR';
@@ -22,6 +23,8 @@ export class ConverterboxComponent implements OnInit {
     busy: boolean = false;
     @Input() popular: string[] = [];
     @Output() conversionUpdated = new EventEmitter<number>();
+    rate: number = 0;
+    @Input() isDetails: boolean = false;
 
     ngOnInit(): void {
         // Get all available currencies
@@ -37,6 +40,11 @@ export class ConverterboxComponent implements OnInit {
                 complete: () => console.log('Currency symbols loaded'),
             });
         }
+
+        // Always convert onLoad in details page
+        if (this.isDetails) {
+            this.convert();
+        }
     }
 
     // Convert currency pair
@@ -49,6 +57,7 @@ export class ConverterboxComponent implements OnInit {
         const cacheKey = `${this.from}_${this.to}_${this.amount}`;
         if (this.cache.get(cacheKey)) {
             this.result = this.cache.get(cacheKey).result;
+            this.rate = this.cache.get(cacheKey).info.rate;
         } else {
             this.busy = true;
             this.fixerAPI
@@ -56,6 +65,7 @@ export class ConverterboxComponent implements OnInit {
                 .subscribe({
                     next: (res) => {
                         this.result = res.result;
+                        this.rate = res.info.rate;
                         this.cache.set(cacheKey, res);
                         this.busy = false;
                     },
@@ -67,5 +77,21 @@ export class ConverterboxComponent implements OnInit {
         // Signal parent to update popular pairs
         this.conversionUpdated.emit(this.amount);
         return true;
+    }
+
+    swap() {
+        const _from = this.from;
+        const _to = this.to;
+
+        this.to = _from;
+        this.from = _to;
+    }
+
+    // Proxy method
+    // Triggers onChange conversion in details page
+    convertOnChange() {
+        if (this.isDetails) {
+            this.convert();
+        }
     }
 }

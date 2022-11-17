@@ -1,32 +1,37 @@
 <div class="col">
-    <h2>Currency Exchanger</h2>
+    <h2>{{title}}</h2>
     <br />
     <div class="card">
         <div class="grid grid-2">
             <section>
                 <div class="form-group">
                     <label class="label" for="amount">Amount</label>
-                    <input type="text" name="amout" class="input" [(ngModel)]="amount" />
+                    <input type="number" name="amout" class="input" [(ngModel)]="amount" min="0" />
                 </div>
+                <h2 class="text-center convert-rate" *ngIf="result && !busy">
+                    1.00 {{from}} = {{rate | number:'1.0-5'}} {{to}}
+                </h2>
             </section>
             <section>
                 <div class="grid grid-3-converter">
                     <div class="form-group">
                         <label class="label" for="from">From</label>
-                        <select name="from" class="input" [(ngModel)]="from">
+                        <select name="from" class="input" [(ngModel)]="from" [disabled]="!amount || isDetails">
                             <option [value]="symbol.key" *ngFor="let symbol of currencies | keyvalue">
                                 {{symbol.value}}
                             </option>
                         </select>
                     </div>
                     <div class="d-none exchange">
-                        <button class="btn swap-btn">
+                        <button class="btn swap-btn" title="Swap currency pair" (click)="swap()"
+                            [disabled]="!amount || isDetails">
                             <i class="fa fa-exchange fa-fw"></i>
                         </button>
                     </div>
                     <div class="form-group">
                         <label class="label" for="to">To</label>
-                        <select name="to" class="input" [(ngModel)]="to">
+                        <select name="to" class="input" [(ngModel)]="to" [disabled]="!amount"
+                            (change)="convertOnChange()">
                             <option [value]="symbol.key" *ngFor="let symbol of currencies | keyvalue">
                                 {{symbol.value}}
                             </option>
@@ -35,10 +40,10 @@
                 </div>
 
                 <div class="col mt">
-                    <button class="btn btn-success w-100" (click)="convert()" [disabled]="!amount">
+                    <button class="btn btn-success w-100" (click)="convert()" [disabled]="!amount || busy">
                         <i class="fa fa-refresh fa-fw fa-spin" *ngIf="busy"></i>
                         <i class="fa fa-exchange fa-fw" *ngIf="!busy"></i>
-                        Convert
+                        Convert {{from}} to {{to}}
                     </button>
                 </div>
 
@@ -48,8 +53,11 @@
                         <p *ngIf="!result && !busy">Please select a currency pair</p>
                         <p *ngIf="busy">Converting...</p>
                     </div>
-                    <div>
-                        <button class="btn btn-primary btn-lg w-100">More Details</button>
+                    <div *ngIf="!isDetails">
+                        <button class="btn btn-lg w-100" [disabled]="!result" routerLink="/details"
+                            [queryParams]="{from: from, to:to, amount:amount}">
+                            More Details <i class="fa fa-arrow-right fa-fw"></i>
+                        </button>
                     </div>
                 </div>
             </section>
