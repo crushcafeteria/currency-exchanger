@@ -33,24 +33,15 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    updatePopularPairRates(amount: number) {
-        console.log(`Receive amount ${amount} from converter`);
-        this.amount = amount;
-
-        const cacheKey = `popular_${this.from}_${amount}`;
-        if (this.cache.get(cacheKey)) {
-            this.rates = this.cache.get(cacheKey).rates;
-        } else {
-            this.busy = true;
-            this.fixerAPI
-                .latestPopularRates(this.from, this.popular)
-                .subscribe((res) => {
-                    this.rates = res.rates;
-                    console.log(res);
-                    this.cache.set(cacheKey, res);
-                    this.busy = false;
-                });
-        }
+    updatePopularPairRates(data: any) {
+        this.amount = data.amount;
+        this.busy = true;
+        this.fixerAPI
+            .latestPopularRates(data.from, this.popular)
+            .subscribe((res) => {
+                this.rates = res.rates;
+                this.busy = false;
+            });
     }
 
     calculateRate(rate: any) {

@@ -9,7 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
     declarations: [
@@ -24,7 +24,7 @@ import { ChartModule } from 'angular-highcharts';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ChartModule,
+        HighchartsChartModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
