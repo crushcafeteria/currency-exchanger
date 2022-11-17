@@ -1,1 +1,15 @@
-<p>details works!</p>
+<div class="container">
+    <div class="col">
+        <button routerLink="/" class="btn btn-primary float-right">
+            <i class="fa fa-arrow-left fa-fw"></i> Back to Home
+        </button>
+        <app-converterbox [from]="from" [to]="to" [amount]="amount" [isDetails]="true" [title]="getCurrencyName(from)"
+            (conversionUpdated)="updateChart($event)">
+        </app-converterbox>
+    </div>
+
+    <div class="card">
+        <div [chart]="chart"></div>
+    </div>
+
+</div>
