@@ -1,3 +1,13 @@
 .swap-btn {
     margin-top: 27px;
 }
+
+.convert-rate{
+    margin-top: 100px;
+}
+
+@media(max-width: 768px){
+    .convert-rate{
+        margin-top: 30px;
+    }
+}

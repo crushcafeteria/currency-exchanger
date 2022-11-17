@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,13 @@ import { FormsModule } from '@angular/forms';
         NavbarComponent,
         DetailsComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ChartModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
