@@ -111,7 +111,7 @@ export class DetailsComponent implements OnInit {
             xAxis: {
                 type: 'datetime',
                 title: {
-                    text: 'Time Periods',
+                    text: 'Months',
                 },
             },
             yAxis: {

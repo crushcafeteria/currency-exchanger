@@ -31,8 +31,6 @@ export class HomeComponent implements OnInit {
         private cache: CacheResolverService
     ) {}
 
-    ngOnInit(): void {}
-
     updatePopularPairRates(data: any) {
         this.amount = data.amount;
         this.busy = true;
