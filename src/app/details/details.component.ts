@@ -18,12 +18,10 @@ export class DetailsComponent implements OnInit {
     amount: number = 0;
     series: any[] = [];
     busy: boolean = false;
-
     Highcharts: typeof Highcharts = Highcharts; // required
     chartOptions: Highcharts.Options = this.setChartOptions(this.from, this.to); // required
 
     constructor(
-        private cache: CacheResolverService,
         private fixerAPI: FixerAPIService,
         private activeRoute: ActivatedRoute
     ) {}
@@ -43,7 +41,6 @@ export class DetailsComponent implements OnInit {
         this.fixerAPI.getAllCurrencies().subscribe({
             next: (res: any) => {
                 this.currencies = res.symbols;
-                this.cache.set(settings.CACHE_KEYS.SYMBOLS, res.symbols);
             },
             error: (err: any) => console.log(err),
             complete: () => console.log('Currency symbols loaded'),

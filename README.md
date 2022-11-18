@@ -1,6 +1,26 @@
 # CurrencyExchanger
 
+Currency Exchanger is an app the helps customers to handle different currency conversions.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
+
+# Screenshots
+
+### Home page
+
+![](screenshot/desktop.png)
+
+### Details page
+
+![](screenshot/details.png)
+
+### Details page
+
+![](screenshot/mobile.png)
+
+### Details page
+
+![](screenshot/mobile2.png)
 
 ## Development server
 
