@@ -14,11 +14,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ![](screenshot/details.png)
 
-### Details page
+### Mobile view
 
 ![](screenshot/mobile.png)
 
-### Details page
+### Mobile menu
 
 ![](screenshot/mobile2.png)
 
